@@ -1,0 +1,73 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Compiled files
+*.class
+*.pyc
+__pycache__/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+
+# Sensitive files - NEVER commit these!
+*.pcap
+*.cap
+*.hccapx
+passwords.txt
+credentials.txt
+*.hash
+*.pot
+
+# Virtual machine files (too large for Git)
+*.ova
+*.ovf
+*.vmdk
+*.vdi
+*.vhd
+*.vhdx
+*.iso
+*.img
+*.qcow2
+
+# Archive files
+*.7z
+*.zip
+*.tar.gz
+*.rar
+
+# VirtualBox
+*.vbox-prev
+*.vbox-tmp
+
+# Nessus
+*.nessus
+
+# Metasploit
+*.rc
+
+# Large binary files
+*.exe
+*.msi
+*.deb
+*.rpm
