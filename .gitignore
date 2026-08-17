@@ -1,36 +1,28 @@
-# OS generated files
+# ============================================
+# Cybersecurity Internship B082 — .gitignore
+# ============================================
+
+# ----- Future Week Folders (not yet started) -----
+Week-2-Footprinting-Scanning/
+Week-3-Cracking-Attacking/
+Week-4-Full-Pentest-Project/
+Reports/
+Resources/
+
+# ----- OS Generated Files -----
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 desktop.ini
+ehthumbs.db
 
-# Editor files
+# ----- Editor / IDE Files -----
+.vscode/
+.idea/
 *.swp
 *.swo
 *~
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
 
-# Compiled files
-*.class
-*.pyc
-__pycache__/
-
-# Log files
-*.log
-
-# Temporary files
-*.tmp
-*.bak
-*.orig
-
-# Sensitive files - NEVER commit these!
+# ----- Sensitive Data — NEVER commit! -----
 *.pcap
 *.cap
 *.hccapx
@@ -39,7 +31,7 @@ credentials.txt
 *.hash
 *.pot
 
-# Virtual machine files (too large for Git)
+# ----- Virtual Machine Files (too large) -----
 *.ova
 *.ovf
 *.vmdk
@@ -50,24 +42,30 @@ credentials.txt
 *.img
 *.qcow2
 
-# Archive files
+# ----- Archives -----
 *.7z
 *.zip
 *.tar.gz
 *.rar
 
-# VirtualBox
+# ----- VirtualBox Config -----
 *.vbox-prev
 *.vbox-tmp
 
-# Nessus
+# ----- Scan & Tool Outputs -----
 *.nessus
+*.xml
+*.gnmap
+*.nmap
 
-# Metasploit
-*.rc
-
-# Large binary files
+# ----- Compiled / Runtime -----
 *.exe
 *.msi
-*.deb
-*.rpm
+*.pyc
+__pycache__/
+
+# ----- Temp & Logs -----
+*.log
+*.tmp
+*.bak
+*.orig
