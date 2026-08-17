@@ -10,13 +10,13 @@
 
 ## 📌 Program at a Glance
 
-| | Detail |
-|---|---|
-| **Batch** | B082 — August 2026 |
-| **Duration** | 4 Weeks |
-| **Mode** | 100% Remote + Weekly LIVE Zoom Sessions |
-| **Instructor** | Waqas Karim (CCIE) |
-| **Focus** | Penetration Testing, VAPT, Network Security |
+|               | Detail                                      |
+|---------------|---------------------------------------------|
+| **Batch**     | B082 — August 2026                          |
+| **Duration**  | 4 Weeks                                     |
+| **Mode**      | 100% Remote + Weekly LIVE Zoom Sessions     |
+| **Instructor**| Waqas Karim (CCIE)                          |
+| **Focus**     | Penetration Testing, VAPT, Network Security |
 
 ---
 
@@ -24,65 +24,64 @@
 
 ```
 .
-├── README.md                       ← You are here
+├── README.md                  ← You are here
 └── Week-1-Lab-Setup/
-    ├── README.md                   ← Detailed lab setup documentation
-    └── screenshots/                ← Evidence & verification screenshots
+    └── README.md              ← Lab setup documentation & screenshots
 ```
 
-> 🔒 *Weeks 2–4 and Reports will be added as each project is completed and submitted.*
+> Weeks 2–4 will be added as each project is completed and submitted.
 
 ---
 
 ## 📆 Progress Tracker
 
-| Week | Project | Track | Status |
-|:---:|---|:---:|:---:|
-| 1 | [Lab Setup — Kali Linux + VirtualBox](Week-1-Lab-Setup/) | 🔧 Essentials | 🟡 In Progress |
-| 2 | Footprinting, Scanning & Report Writing | 🔴 Red Team | ⬜ Upcoming |
-| 3 | Cracking & Attacking (Metasploit, JTR) | 🔴 Red Team | ⬜ Upcoming |
-| 4 | Full Pentest + Wireshark SOC Analysis | 🔴🔵 Both | ⬜ Upcoming |
+| Week | Project                                                      | Track          | Status        |
+|:----:|--------------------------------------------------------------|:--------------:|:-------------:|
+|  1   | [Lab Setup — Kali + VirtualBox](Week-1-Lab-Setup/)           | 🔧 Essentials  | 🟡 In Progress |
+|  2   | Footprinting, Scanning & Report Writing                      | 🔴 Red Team    | ⬜ Upcoming    |
+|  3   | Cracking & Attacking (Metasploit, JTR)                       | 🔴 Red Team    | ⬜ Upcoming    |
+|  4   | Full Pentest + Wireshark SOC Analysis                        | 🔴🔵 Red + Blue | ⬜ Upcoming    |
 
 ---
 
 ## 🖥️ Lab Environment
 
 ```
-┌──────────────────────────────────────────────────────┐
-│              HOST — Windows 10                       │
-│       8 GB RAM  ·  256 GB SSD  ·  Core i5            │
-│                                                      │
-│   ┌──────────────────────────────────────────────┐   │
-│   │       VirtualBox · NATNetwork 10.0.0.0/24    │   │
-│   │                                              │   │
-│   │   ┌──────────┐  ┌───────────┐  ┌─────────┐   │   │
-│   │   │  Kali    │  │  Win 10   │  │ Metaspl │   │   │
-│   │   │ 10.0.0.2 │  │ 10.0.0.10 │  │10.0.0.11│   │   │
-│   │   │ Attacker │  │  Victim   │  │ Victim  │   │   │
-│   │   └──────────┘  └───────────┘  └─────────┘   │   │
-│   └──────────────────────────────────────────────┘   │
-└──────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────┐
+│                HOST — Windows 10                   │
+│         8 GB RAM · 256 GB SSD · Core i5            │
+│                                                    │
+│  ┌──────────────────────────────────────────────┐  │
+│  │      VirtualBox · NATNetwork 10.0.0.0/24     │  │
+│  │                                              │  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐   │  │
+│  │  │   Kali   │  │  Win 10  │  │ Metaspl  │   │  │
+│  │  │ 10.0.0.2 │  │10.0.0.10 │  │10.0.0.11 │   │  │
+│  │  │ Attacker │  │  Victim  │  │  Victim  │   │  │
+│  │  └──────────┘  └──────────┘  └──────────┘   │  │
+│  └──────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────┘
 ```
 
-| VM | IP Address | Role |
-|---|---|---|
-| Kali Linux | `10.0.0.2/24` | Attacker |
-| Windows 10 | `10.0.0.10/24` | Victim |
-| Metasploitable 2 | `10.0.0.11/24` | Victim |
-| Windows 7 | `10.0.0.16/24` | Victim |
+| VM               | IP Address    | Role     |
+|------------------|---------------|----------|
+| Kali Linux       | `10.0.0.2/24` | Attacker |
+| Windows 10       | `10.0.0.10/24`| Victim   |
+| Metasploitable 2 | `10.0.0.11/24`| Victim   |
+| Windows 7        | `10.0.0.16/24`| Victim   |
 
 ---
 
 ## 🛠️ Tools & Technologies
 
-| Category | Tools |
-|---|---|
-| Pentesting OS | Kali Linux |
-| Scanning | Nmap, Zenmap, Nessus |
-| Exploitation | Metasploit, Burp Suite |
-| OSINT | Maltego, theHarvester |
-| Analysis | Wireshark |
-| Cracking | John The Ripper, Hydra |
+| Category       | Tools                     |
+|----------------|---------------------------|
+| Pentesting OS  | Kali Linux                |
+| Scanning       | Nmap, Zenmap, Nessus      |
+| Exploitation   | Metasploit, Burp Suite    |
+| OSINT          | Maltego, theHarvester     |
+| Analysis       | Wireshark                 |
+| Cracking       | John The Ripper, Hydra    |
 
 ---
 
@@ -96,13 +95,13 @@
 
 ## 🔗 Quick Links
 
-| Resource | Link |
-|---|---|
-| NetworkWalks Website | [networkwalks.com](https://www.networkwalks.com) |
-| Sample GitHub Repo | [Cybersecurity-Lab-Setup1](https://github.com/waqaskarimccie/Cybersecurity-Lab-Setup1) |
-| Project Submission | [Submit Here](https://networkwalks.com/project-submit/) |
-| Instructor LinkedIn | [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/) |
-| NetworkWalks LinkedIn | [Follow](https://linkedin.com/company/networkwalks/) |
+| Resource              | Link                                                                          |
+|-----------------------|-------------------------------------------------------------------------------|
+| NetworkWalks Website  | [networkwalks.com](https://www.networkwalks.com)                              |
+| Sample GitHub Repo    | [Cybersecurity-Lab-Setup1](https://github.com/waqaskarimccie/Cybersecurity-Lab-Setup1) |
+| Project Submission    | [Submit Here](https://networkwalks.com/project-submit/)                       |
+| Instructor LinkedIn   | [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/)                      |
+| NetworkWalks LinkedIn | [Follow](https://linkedin.com/company/networkwalks/)                          |
 
 ---
 

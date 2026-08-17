@@ -1,71 +1,44 @@
-# ============================================
-# Cybersecurity Internship B082 — .gitignore
-# ============================================
-
-# ----- Future Week Folders (not yet started) -----
+# Future week folders (will be added when completed)
 Week-2-Footprinting-Scanning/
 Week-3-Cracking-Attacking/
 Week-4-Full-Pentest-Project/
 Reports/
 Resources/
 
-# ----- OS Generated Files -----
+# OS files
 .DS_Store
 Thumbs.db
 desktop.ini
-ehthumbs.db
 
-# ----- Editor / IDE Files -----
+# Editor / IDE
 .vscode/
 .idea/
 *.swp
-*.swo
 *~
 
-# ----- Sensitive Data — NEVER commit! -----
+# Sensitive data — NEVER commit
 *.pcap
 *.cap
-*.hccapx
 passwords.txt
 credentials.txt
 *.hash
 *.pot
 
-# ----- Virtual Machine Files (too large) -----
+# Virtual machine images (too large for Git)
 *.ova
 *.ovf
 *.vmdk
 *.vdi
-*.vhd
-*.vhdx
 *.iso
 *.img
-*.qcow2
 
-# ----- Archives -----
+# Archives
 *.7z
 *.zip
 *.tar.gz
 *.rar
 
-# ----- VirtualBox Config -----
-*.vbox-prev
-*.vbox-tmp
-
-# ----- Scan & Tool Outputs -----
-*.nessus
-*.xml
-*.gnmap
-*.nmap
-
-# ----- Compiled / Runtime -----
-*.exe
-*.msi
-*.pyc
-__pycache__/
-
-# ----- Temp & Logs -----
+# Temp files
 *.log
 *.tmp
 *.bak
-*.orig
