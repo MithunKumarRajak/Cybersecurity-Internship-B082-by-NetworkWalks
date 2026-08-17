@@ -48,17 +48,17 @@
 
 ```
 ┌────────────────────────────────────────────────────┐
-│                HOST — Windows 10                   │
-│         8 GB RAM · 256 GB SSD · Core i5            │
+│                 HOST - Windows 10                  │
+│          8 GB RAM / 256 GB SSD / Core i5           │
 │                                                    │
 │  ┌──────────────────────────────────────────────┐  │
-│  │      VirtualBox · NATNetwork 10.0.0.0/24     │  │
+│  │     VirtualBox - NATNetwork 10.0.0.0/24      │  │
 │  │                                              │  │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐   │  │
-│  │  │   Kali   │  │  Win 10  │  │ Metaspl  │   │  │
-│  │  │ 10.0.0.2 │  │10.0.0.10 │  │10.0.0.11 │   │  │
-│  │  │ Attacker │  │  Victim  │  │  Victim  │   │  │
-│  │  └──────────┘  └──────────┘  └──────────┘   │  │
+│  │  ┌──────────┐   ┌──────────┐   ┌──────────┐  │  │
+│  │  │   Kali   │   │  Win 10  │   │ Metaspl  │  │  │
+│  │  │ 10.0.0.2 │   │10.0.0.10 │   │10.0.0.11 │  │  │
+│  │  │ Attacker │   │  Victim  │   │  Victim  │  │  │
+│  │  └──────────┘   └──────────┘   └──────────┘  │  │
 │  └──────────────────────────────────────────────┘  │
 └────────────────────────────────────────────────────┘
 ```
@@ -95,13 +95,11 @@
 
 ## 🔗 Quick Links
 
-| Resource              | Link                                                                          |
-|-----------------------|-------------------------------------------------------------------------------|
-| NetworkWalks Website  | [networkwalks.com](https://www.networkwalks.com)                              |
-| Sample GitHub Repo    | [Cybersecurity-Lab-Setup1](https://github.com/waqaskarimccie/Cybersecurity-Lab-Setup1) |
-| Project Submission    | [Submit Here](https://networkwalks.com/project-submit/)                       |
-| Instructor LinkedIn   | [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/)                      |
-| NetworkWalks LinkedIn | [Follow](https://linkedin.com/company/networkwalks/)                          |
+| Resource              | Link                                                 |
+|-----------------------|------------------------------------------------------|
+| NetworkWalks Website  | [networkwalks.com](https://www.networkwalks.com)     |
+| Instructor LinkedIn   | [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/) |
+| NetworkWalks LinkedIn | [Follow](https://linkedin.com/company/networkwalks/) |
 
 ---
 

@@ -14,23 +14,23 @@ Build an isolated virtual lab environment for cybersecurity testing and penetrat
 
 ```
 ┌────────────────────────────────────────────────────┐
-│                HOST — Windows 10                   │
-│         8 GB RAM · 256 GB SSD · Core i5            │
+│                 HOST - Windows 10                  │
+│          8 GB RAM / 256 GB SSD / Core i5           │
 │                                                    │
 │  ┌──────────────────────────────────────────────┐  │
-│  │      VirtualBox · NATNetwork 10.0.0.0/24     │  │
+│  │     VirtualBox - NATNetwork 10.0.0.0/24      │  │
 │  │                                              │  │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐   │  │
-│  │  │   Kali   │  │  Win 10  │  │ Metaspl  │   │  │
-│  │  │ 10.0.0.2 │  │10.0.0.10 │  │10.0.0.11 │   │  │
-│  │  │ Attacker │  │  Victim  │  │  Victim  │   │  │
-│  │  └──────────┘  └──────────┘  └──────────┘   │  │
+│  │  ┌──────────┐   ┌──────────┐   ┌──────────┐  │  │
+│  │  │   Kali   │   │  Win 10  │   │ Metaspl  │  │  │
+│  │  │ 10.0.0.2 │   │10.0.0.10 │   │10.0.0.11 │  │  │
+│  │  │ Attacker │   │  Victim  │   │  Victim  │  │  │
+│  │  └──────────┘   └──────────┘   └──────────┘  │  │
 │  │                                              │  │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐   │  │
-│  │  │  Win 7   │  │ Srv 2016 │  │ Android  │   │  │
-│  │  │10.0.0.16 │  │ 10.0.0.9 │  │ 10.0.0.7 │   │  │
-│  │  │  Victim  │  │ Optional │  │ Optional │   │  │
-│  │  └──────────┘  └──────────┘  └──────────┘   │  │
+│  │  ┌──────────┐   ┌──────────┐   ┌──────────┐  │  │
+│  │  │  Win 7   │   │ Srv 2016 │   │ Android  │  │  │
+│  │  │10.0.0.16 │   │ 10.0.0.9 │   │ 10.0.0.7 │  │  │
+│  │  │  Victim  │   │ Optional │   │ Optional │  │  │
+│  │  └──────────┘   └──────────┘   └──────────┘  │  │
 │  └──────────────────────────────────────────────┘  │
 └────────────────────────────────────────────────────┘
 ```
@@ -168,7 +168,6 @@ Snapshot: "Clean Kali — Network Setup"
 - [Kali Linux Downloads](https://kali.org/get-kali)
 - [7-Zip Downloads](https://7-zip.org/download.html)
 - [NetworkWalks Academy](https://www.networkwalks.com)
-- [Sample Lab Repo](https://github.com/waqaskarimccie/Cybersecurity-Lab-Setup1)
 
 ---
 
