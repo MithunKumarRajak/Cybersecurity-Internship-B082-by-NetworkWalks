@@ -1,5 +1,6 @@
 # 🛡️ Cybersecurity & Ethical Hacking — Internship B082
 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mithun_Kumar_Rajak-0077b5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mithun-kumar-rajak/)
 [![Program](https://img.shields.io/badge/NetworkWalks-B082_Internship-0a66c2?style=for-the-badge&logo=shield&logoColor=white)](https://www.networkwalks.com)
 [![Week](https://img.shields.io/badge/Current-Week_1-28a745?style=for-the-badge)](Week-1-Lab-Setup/)
 [![Status](https://img.shields.io/badge/Status-In_Progress-f0ad4e?style=for-the-badge)](Week-1-Lab-Setup/)
@@ -10,13 +11,14 @@
 
 ## 📌 Program at a Glance
 
-|               | Detail                                      |
-|---------------|---------------------------------------------|
-| **Batch**     | B082 — August 2026                          |
-| **Duration**  | 4 Weeks                                     |
-| **Mode**      | 100% Remote + Weekly LIVE Zoom Sessions     |
-| **Instructor**| Waqas Karim (CCIE)                          |
-| **Focus**     | Penetration Testing, VAPT, Network Security |
+|               | Detail                                                                |
+|---------------|-----------------------------------------------------------------------|
+| **Intern**    | [Mithun Kumar Rajak](https://www.linkedin.com/in/mithun-kumar-rajak/) |
+| **Batch**     | B082 — August 2026                                                    |
+| **Duration**  | 4 Weeks                                                               |
+| **Mode**      | 100% Remote + Weekly LIVE Zoom Sessions                               |
+| **Instructor**| Waqas Karim (CCIE)                                                    |
+| **Focus**     | Penetration Testing, VAPT, Network Security                           |
 
 ---
 
@@ -95,11 +97,12 @@
 
 ## 🔗 Quick Links
 
-| Resource              | Link                                                 |
-|-----------------------|------------------------------------------------------|
-| NetworkWalks Website  | [networkwalks.com](https://www.networkwalks.com)     |
-| Instructor LinkedIn   | [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/) |
-| NetworkWalks LinkedIn | [Follow](https://linkedin.com/company/networkwalks/) |
+| Resource              | Link                                                                  |
+|-----------------------|-----------------------------------------------------------------------|
+| LinkedIn Profile      | [Mithun Kumar Rajak](https://www.linkedin.com/in/mithun-kumar-rajak/) |
+| NetworkWalks Website  | [networkwalks.com](https://www.networkwalks.com)                      |
+| Instructor LinkedIn   | [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/)               |
+| NetworkWalks LinkedIn | [Follow](https://linkedin.com/company/networkwalks/)                  |
 
 ---
 
