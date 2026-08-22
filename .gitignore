@@ -1,10 +1,3 @@
-# Future week folders (will be added when completed)
-Week-2-Footprinting-Scanning/
-Week-3-Cracking-Attacking/
-Week-4-Full-Pentest-Project/
-Reports/
-Resources/
-
 # OS files
 .DS_Store
 Thumbs.db
@@ -32,13 +25,13 @@ credentials.txt
 *.iso
 *.img
 
-# Archives
+# Compressed Archives (VM disk downloads)
 *.7z
 *.zip
 *.tar.gz
 *.rar
 
-# Temp files
+# Temporary / Log files
 *.log
 *.tmp
 *.bak

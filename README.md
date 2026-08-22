@@ -2,8 +2,8 @@
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Mithun_Kumar_Rajak-0077b5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mithun-kumar-rajak/)
 [![Program](https://img.shields.io/badge/NetworkWalks-B082_Internship-0a66c2?style=for-the-badge&logo=shield&logoColor=white)](https://www.networkwalks.com)
-[![Week](https://img.shields.io/badge/Current-Week_1-28a745?style=for-the-badge)](Week-1-Lab-Setup/)
-[![Status](https://img.shields.io/badge/Status-In_Progress-f0ad4e?style=for-the-badge)](Week-1-Lab-Setup/)
+[![Week](https://img.shields.io/badge/Current-Week_2-28a745?style=for-the-badge)](Week-2-Footprinting-Scanning/)
+[![Status](https://img.shields.io/badge/Status-In_Progress-f0ad4e?style=for-the-badge)](Week-2-Footprinting-Scanning/)
 
 > A 4-week remote cybersecurity internship by **[NetworkWalks Academy](https://www.networkwalks.com)**, guided by CCIE-certified industry experts. This repository documents my hands-on work — from lab setup to full penetration testing.
 
@@ -11,14 +11,14 @@
 
 ## 📌 Program at a Glance
 
-|               | Detail                                                                |
-|---------------|-----------------------------------------------------------------------|
-| **Intern**    | [Mithun Kumar Rajak](https://www.linkedin.com/in/mithun-kumar-rajak/) |
-| **Batch**     | B082 — August 2026                                                    |
-| **Duration**  | 4 Weeks                                                               |
-| **Mode**      | 100% Remote + Weekly LIVE Zoom Sessions                               |
-| **Instructor**| Waqas Karim (CCIE)                                                    |
-| **Focus**     | Penetration Testing, VAPT, Network Security                           |
+| Field | Detail |
+|---|---|
+| **Intern** | [Mithun Kumar Rajak](https://www.linkedin.com/in/mithun-kumar-rajak/) |
+| **Batch** | B082 — August 2026 |
+| **Duration** | 4 Weeks |
+| **Mode** | 100% Remote + Weekly LIVE Zoom Sessions |
+| **Instructor** | Waqas Karim (CCIE) |
+| **Focus** | Penetration Testing, VAPT, Network Security, SOC Analysis |
 
 ---
 
@@ -26,83 +26,105 @@
 
 ```
 .
-├── README.md                  ← You are here
-└── Week-1-Lab-Setup/
-    └── README.md              ← Lab setup documentation & screenshots
+├── README.md                      <- Root repository overview & progress tracker
+├── Reports/
+│   ├── README.md                  <- Report index & templates
+│   └── Week1_Lab_Setup_Report.pdf <- Submitted Week 1 Lab Setup Report (PDF)
+├── Resources/
+│   └── README.md                  <- References, downloads & cheat sheets
+├── Week-1-Lab-Setup/
+│   └── README.md                  <- Week 1: Kali Linux 2026.2 + VirtualBox setup
+├── Week-2-Footprinting-Scanning/
+│   └── README.md                  <- Week 2: Reconnaissance, scanning & VAPT
+├── Week-3-Cracking-Attacking/
+│   └── README.md                  <- Week 3: Exploitation & password cracking
+└── Week-4-Full-Pentest-Project/
+    └── README.md                  <- Week 4: Capstone pentest + SOC Wireshark report
 ```
-
-> Weeks 2–4 will be added as each project is completed and submitted.
 
 ---
 
 ## 📆 Progress Tracker
 
-| Week | Project                                                      | Track          | Status        |
-|:----:|--------------------------------------------------------------|:--------------:|:-------------:|
-|  1   | [Lab Setup — Kali + VirtualBox](Week-1-Lab-Setup/)           | 🔧 Essentials  | 🟡 In Progress |
-|  2   | Footprinting, Scanning & Report Writing                      | 🔴 Red Team    | ⬜ Upcoming    |
-|  3   | Cracking & Attacking (Metasploit, JTR)                       | 🔴 Red Team    | ⬜ Upcoming    |
-|  4   | Full Pentest + Wireshark SOC Analysis                        | 🔴🔵 Red + Blue | ⬜ Upcoming    |
+| Week | Project | Track | Status | Report / Deliverable |
+|:---:|---|:---:|:---:|---|
+| **1** | [Lab Setup — Kali Linux 2026.2 + VirtualBox](Week-1-Lab-Setup/) | 🔧 Essentials | ✅ Completed | [📄 Week 1 PDF Report](Reports/Week1_Lab_Setup_Report.pdf) |
+| **2** | [Footprinting, Scanning & Report Writing](Week-2-Footprinting-Scanning/) | 🔴 Red Team | 🟡 In Progress | ⬜ Upcoming |
+| **3** | [Cracking & Attacking (Metasploit, JTR)](Week-3-Cracking-Attacking/) | 🔴 Red Team | ⬜ Upcoming | ⬜ Upcoming |
+| **4** | [Full Pentest + Wireshark SOC Analysis](Week-4-Full-Pentest-Project/) | 🔴🔵 Red + Blue | ⬜ Upcoming | ⬜ Upcoming |
 
 ---
 
-## 🖥️ Lab Environment
+## 🖥️ Lab Architecture & Network Topology
 
 ```
-┌────────────────────────────────────────────────────┐
-│                 HOST - Windows 10                  │
-│          8 GB RAM / 256 GB SSD / Core i5           │
-│                                                    │
-│  ┌──────────────────────────────────────────────┐  │
-│  │     VirtualBox - NATNetwork 10.0.0.0/24      │  │
-│  │                                              │  │
-│  │  ┌──────────┐   ┌──────────┐   ┌──────────┐  │  │
-│  │  │   Kali   │   │  Win 10  │   │ Metaspl  │  │  │
-│  │  │ 10.0.0.2 │   │10.0.0.10 │   │10.0.0.11 │  │  │
-│  │  │ Attacker │   │  Victim  │   │  Victim  │  │  │
-│  │  └──────────┘   └──────────┘   └──────────┘  │  │
-│  └──────────────────────────────────────────────┘  │
-└────────────────────────────────────────────────────┘
++-----------------------------------------------------------------------+
+|                           HOST: Windows 11                            |
+|                    Oracle VirtualBox Hypervisor                       |
+|                                                                       |
+|   +---------------------------------------------------------------+   |
+|   |         Isolated Virtual Subnet: NatNetwork (10.0.2.0/24)     |   |
+|   |                     DHCP: Enabled | IPv6: Off                 |   |
+|   |                                                               |   |
+|   |   +--------------------------+     +----------------------+   |   |
+|   |   |   Kali Linux 2026.2      |     |  Target VM (Planned) |   |   |
+|   |   |   Role: Attacker         |     |  Role: Victim        |   |   |
+|   |   |   IP:   10.0.2.15 (eth0) | <-> |  IP:   10.0.2.x      |   |   |
+|   |   |   RAM:  4096 MB | 3 vCPU |     |  OS:   Metasploitable|   |   |
+|   |   |   Disk: 80.09 GB VDI     |     |        / Windows     |   |   |
+|   |   |   Mode: Promisc AllowAll |     |                      |   |   |
+|   |   +--------------------------+     +----------------------+   |   |
+|   +---------------------------------------------------------------+   |
+|                                  |                                    |
+|                                  v (NAT Outbound Access)              |
+|                    +---------------------------+                      |
+|                    |      Internet / WAN       |                      |
+|                    +---------------------------+                      |
++-----------------------------------------------------------------------+
 ```
 
-| VM               | IP Address    | Role     |
-|------------------|---------------|----------|
-| Kali Linux       | `10.0.0.2/24` | Attacker |
-| Windows 10       | `10.0.0.10/24`| Victim   |
-| Metasploitable 2 | `10.0.0.11/24`| Victim   |
-| Windows 7        | `10.0.0.16/24`| Victim   |
+### Lab Nodes & IP Addressing
+
+| Node / Virtual Machine | Operating System | IP Address | Subnet | Role | Status |
+|---|---|---|---|---|:---:|
+| **Host Machine** | Windows 11 | Host Network | Host LAN | Hypervisor Host | Active |
+| **Virtual Gateway** | VirtualBox NAT | `10.0.2.1` | `10.0.2.0/24` | Default Gateway | Active |
+| **Kali Linux (Attacker)** | Kali 2026.2 (x64) | `10.0.2.15` | `10.0.2.0/24` | Primary Pentest Machine | ✅ Ready |
+| **Metasploitable 2** | Linux (Vulnerable) | `10.0.2.x` | `10.0.2.0/24` | Red Team Target | ⏳ Week 2+ |
+| **Windows Target** | Windows OS | `10.0.2.x` | `10.0.2.0/24` | Red Team Target | ⏳ Week 2+ |
 
 ---
 
 ## 🛠️ Tools & Technologies
 
-| Category       | Tools                     |
-|----------------|---------------------------|
-| Pentesting OS  | Kali Linux                |
-| Scanning       | Nmap, Zenmap, Nessus      |
-| Exploitation   | Metasploit, Burp Suite    |
-| OSINT          | Maltego, theHarvester     |
-| Analysis       | Wireshark                 |
-| Cracking       | John The Ripper, Hydra    |
+| Category | Tools | Applied In |
+|---|---|---|
+| **Pentesting OS** | Kali Linux 2026.2 | Week 1, 2, 3, 4 |
+| **Hypervisor** | Oracle VirtualBox 7.x | Week 1, 2, 3, 4 |
+| **Scanning & Recon** | Nmap, Zenmap, Nessus, Nikto | Week 2, 4 |
+| **OSINT & Footprinting** | Maltego, theHarvester, GHDB (Google Dorks) | Week 2, 4 |
+| **Exploitation Frameworks** | Metasploit Framework, Burp Suite | Week 3, 4 |
+| **Password Attacks** | John The Ripper (JTR), Hydra, Hashcat | Week 3, 4 |
+| **Packet & SOC Analysis** | Wireshark, tcpdump | Week 1, 4 |
 
 ---
 
 ## ⚖️ Disclaimer
 
-> **All work in this repository is strictly for educational purposes.**
-> Testing is performed exclusively on **owned lab machines** within an isolated virtual environment.
-> Unauthorized access to any system is illegal. I accept full responsibility for my actions.
+> **All work in this repository is strictly for educational and authorized security testing purposes.**
+> Testing is performed exclusively on **owned lab machines** within an isolated virtual environment (`10.0.2.0/24`).
+> Unauthorized access to any system outside this lab is illegal and strictly against professional ethics.
 
 ---
 
 ## 🔗 Quick Links
 
-| Resource              | Link                                                                  |
-|-----------------------|-----------------------------------------------------------------------|
-| LinkedIn Profile      | [Mithun Kumar Rajak](https://www.linkedin.com/in/mithun-kumar-rajak/) |
-| NetworkWalks Website  | [networkwalks.com](https://www.networkwalks.com)                      |
-| Instructor LinkedIn   | [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/)               |
-| NetworkWalks LinkedIn | [Follow](https://linkedin.com/company/networkwalks/)                  |
+| Resource | Link |
+|---|---|
+| **LinkedIn Profile** | [Mithun Kumar Rajak](https://www.linkedin.com/in/mithun-kumar-rajak/) |
+| **NetworkWalks Website** | [networkwalks.com](https://www.networkwalks.com) |
+| **Instructor LinkedIn** | [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/) |
+| **NetworkWalks LinkedIn** | [Follow Company](https://linkedin.com/company/networkwalks/) |
 
 ---
 

@@ -1,176 +1,243 @@
-# 🖥️ Week 1 — Cybersecurity & Pentesting Lab Setup
+# 🖥️ Week 1 — Lab Environment Setup Report
 
-> **Batch B082** · NetworkWalks Academy · August 2026
+> **Batch B082** · NetworkWalks Academy · **Submission Date:** 22 August 2026
 
 ---
 
 ## 🎯 Objective
 
-Build an isolated virtual lab environment for cybersecurity testing and penetration testing practice using **VirtualBox** and **Kali Linux**.
+Build a safe, isolated penetration-testing environment on a personal host machine using **Oracle VirtualBox**. This involved deploying a pre-built **Kali Linux 2026.2** virtual machine, securing default credentials, and configuring an internal virtual network (**NAT Network**) so that multiple lab VMs can communicate with each other and access the internet, without exposing the lab environment to the host's real home/office network.
 
 ---
 
 ## 🏗️ Lab Architecture
 
 ```
-┌────────────────────────────────────────────────────┐
-│                 HOST - Windows 10                  │
-│          8 GB RAM / 256 GB SSD / Core i5           │
-│                                                    │
-│  ┌──────────────────────────────────────────────┐  │
-│  │     VirtualBox - NATNetwork 10.0.0.0/24      │  │
-│  │                                              │  │
-│  │  ┌──────────┐   ┌──────────┐   ┌──────────┐  │  │
-│  │  │   Kali   │   │  Win 10  │   │ Metaspl  │  │  │
-│  │  │ 10.0.0.2 │   │10.0.0.10 │   │10.0.0.11 │  │  │
-│  │  │ Attacker │   │  Victim  │   │  Victim  │  │  │
-│  │  └──────────┘   └──────────┘   └──────────┘  │  │
-│  │                                              │  │
-│  │  ┌──────────┐   ┌──────────┐   ┌──────────┐  │  │
-│  │  │  Win 7   │   │ Srv 2016 │   │ Android  │  │  │
-│  │  │10.0.0.16 │   │ 10.0.0.9 │   │ 10.0.0.7 │  │  │
-│  │  │  Victim  │   │ Optional │   │ Optional │  │  │
-│  │  └──────────┘   └──────────┘   └──────────┘  │  │
-│  └──────────────────────────────────────────────┘  │
-└────────────────────────────────────────────────────┘
++-----------------------------------------------------------------------+
+|                           HOST: Windows 11                            |
+|                    Oracle VirtualBox Hypervisor                       |
+|                                                                       |
+|   +---------------------------------------------------------------+   |
+|   |         Isolated Virtual Subnet: NatNetwork (10.0.2.0/24)     |   |
+|   |                     DHCP: Enabled | IPv6: Off                 |   |
+|   |                                                               |   |
+|   |   +--------------------------+     +----------------------+   |   |
+|   |   |   Kali Linux 2026.2      |     |  Target VM (Planned) |   |   |
+|   |   |   Role: Attacker         |     |  Role: Victim        |   |   |
+|   |   |   IP:   10.0.2.15 (eth0) | <-> |  IP:   10.0.2.x      |   |   |
+|   |   |   RAM:  4096 MB | 3 vCPU |     |  OS:   Metasploitable|   |   |
+|   |   |   Disk: 80.09 GB VDI     |     |        / Windows     |   |   |
+|   |   |   Mode: Promisc AllowAll |     |                      |   |   |
+|   |   +--------------------------+     +----------------------+   |   |
+|   +---------------------------------------------------------------+   |
+|                                  |                                    |
+|                                  v (NAT Outbound Access)              |
+|                    +---------------------------+                      |
+|                    |      Internet / WAN       |                      |
+|                    +---------------------------+                      |
++-----------------------------------------------------------------------+
 ```
 
 ---
 
-## ⚙️ Configuration Summary
+## ⚙️ Lab Environment Summary
 
-| Component                  | Configuration            |
-|----------------------------|--------------------------|
-| Host OS                    | Windows 10               |
-| Hypervisor                 | VirtualBox               |
-| Network                    | NATNetwork — `10.0.0.0/24` |
-| Kali Linux (Attacker)      | `10.0.0.2/24` · 2048 MB RAM |
-| Windows 10 (Victim)        | `10.0.0.10/24`           |
-| Metasploitable 2 (Victim)  | `10.0.0.11/24`           |
-| Windows 7 (Victim)         | `10.0.0.16/24`           |
-| Gateway                    | `10.0.0.1`               |
-| DNS                        | `8.8.8.8`                |
-
----
-
-## 🪜 Setup Steps
-
-### 1. Install 7-Zip
-
-Installed [7-Zip](https://7-zip.org/download.html) to extract the Kali Linux `.7z` package.
-
-<!-- ![7-Zip Installation](screenshots/01-7zip-install.png) -->
-
-### 2. Install VirtualBox
-
-Downloaded and installed [VirtualBox](https://virtualbox.org/wiki/Downloads) as the hypervisor.
-
-<!-- ![VirtualBox Installation](screenshots/02-virtualbox-install.png) -->
-
-### 3. Create NAT Network
-
-Created a dedicated NAT Network in VirtualBox:
-
-```
-Network Name:  NatNetwork
-IPv4 Prefix:   10.0.0.0/24
-DHCP:          Enabled
-IPv6:          Disabled
-```
-
-> **Why NAT Network?** Allows all VMs to communicate with each other *and* access the internet — essential for a multi-machine pentesting lab.
-
-<!-- ![NAT Network](screenshots/03-nat-network.png) -->
-
-### 4. Import Kali Linux
-
-Imported the [Kali Linux](https://kali.org/get-kali) pre-built VM into VirtualBox.
-
-```
-Adapter:    NAT Network → NatNetwork
-RAM:        2048 MB
-Adapter:    Intel PRO/1000 MT Desktop
-```
-
-<!-- ![Kali Linux VM](screenshots/04-kali-import.png) -->
-
-### 5. Configure Static IP on Kali
-
-Assigned a consistent static IP for reliable lab documentation:
-
-```
-IP Address:    10.0.0.2
-Subnet Mask:   255.255.255.0
-Gateway:       10.0.0.1
-DNS:           8.8.8.8
-```
-
-<!-- ![Kali Network](screenshots/05-kali-network.png) -->
-
-### 6. Create Baseline Snapshot
-
-Took a clean VirtualBox snapshot after initial configuration:
-
-```
-Snapshot: "Clean Kali — Network Setup"
-```
-
-> Provides a known-good restore point before any risky exercises.
-
-<!-- ![Snapshot](screenshots/06-snapshot.png) -->
+| Component | Configuration Details |
+|---|---|
+| **Host Operating System** | Windows 11 |
+| **Hypervisor** | Oracle VirtualBox |
+| **Guest OS** | Kali Linux 2026.2 (Rolling, x64) — Pre-built VirtualBox Image |
+| **Base Memory (RAM)** | 4096 MB (4 GB) |
+| **Virtual Processors (vCPU)** | 3 vCPUs |
+| **Storage (Virtual Disk)** | 80.09 GB SATA VDI (Dynamically Allocated) |
+| **Virtual Network Name** | `NatNetwork` |
+| **Network Mode** | NAT Network (`10.0.2.0/24`) |
+| **DHCP Configuration** | Enabled (Auto-assigns lab IP addresses) |
+| **Kali Assigned IP** | `10.0.2.15/24` (Interface: `eth0`) |
+| **Adapter Promiscuous Mode** | Allow All (Required for Wireshark & packet sniffing) |
 
 ---
 
-## 🔎 Verification
+## 🪜 Steps Performed
 
-| Test             | Command                    | Expected Result       | Status |
-|------------------|----------------------------|-----------------------|:------:|
-| IP Address       | `ip a`                     | Shows `10.0.0.2/24`  |   ⬜   |
-| Gateway Ping     | `ping 10.0.0.1`            | Replies received      |   ⬜   |
-| Internet Ping    | `ping 8.8.8.8`             | Replies received      |   ⬜   |
-| DNS Resolution   | `nslookup networkwalks.com` | Domain resolves       |   ⬜   |
-| Nmap Installed   | `nmap --version`           | Version displayed     |   ⬜   |
-| Snapshot Restore | Restore → `ip a`           | Baseline intact       |   ⬜   |
+### 3.1 Download and Extraction
 
----
+Downloaded the official pre-built **Kali Linux VirtualBox image** (`kali-linux-2026.2-virtualbox-amd64`) as a compressed `.7z` archive and extracted it to obtain two essential files:
 
-## 🐞 Troubleshooting
+- **`kali-linux-2026.2-virtualbox-amd64.vbox`** — The VM configuration file (stores settings including RAM, CPU, network adapters, and boot order).
+- **`kali-linux-2026.2-virtualbox-amd64.vdi`** — The Virtual Disk Image (~15.8 GB compressed base) containing the complete pre-installed Kali Linux OS.
 
-### Problem 1: [Title]
+> 📝 **Linked Pair Architecture:** The `.vbox` and `.vdi` files function as a linked pair. The `.vbox` configuration holds an exact path reference to the `.vdi` disk. Moving one file without the other breaks VM registration in VirtualBox.
 
-- **Symptom:** *Describe what went wrong*
-- **Root Cause:** *What caused it*
-- **Fix:**
-  ```bash
-  # command(s) used to resolve
-  ```
+**Troubleshooting — Duplicate File Extraction:**
+During extraction, the archive extracted into a duplicate nested folder structure, creating redundant copies of both `.vbox` and `.vdi` files. The duplicate copies (~15+ GB) were manually removed before importing to prevent redundant disk space consumption.
 
 ---
 
-## 💡 Key Takeaways
+### 3.2 Importing the VM into VirtualBox
 
-- **NAT Network vs NAT** — NAT Network enables inter-VM communication; standard NAT isolates each VM.
-- **Static IPs** — Assigning consistent IPs simplifies documentation and tool configurations.
-- **Snapshots** — Always snapshot before risky operations for quick rollback.
-- **Documentation** — Recording every step, command, and problem is a core cybersecurity practice.
+The cleaned `.vbox` file was registered in VirtualBox via **Machine → Add**, which automatically linked the associated `.vdi` virtual hard disk.
 
----
-
-## 🔐 Ethical Statement
-
-> All testing in this lab is performed exclusively on **personally owned virtual machines** within an **isolated network**. No unauthorized systems were accessed.
+**Import Specifications:**
+- **VM Name:** `kali-linux-2026.2-virtualbox-amd64`
+- **Memory:** 4096 MB RAM
+- **Processors:** 3 vCPUs
+- **Storage:** 80.09 GB VDI (Dynamically allocated)
+- **Network Adapter:** Attached to `NatNetwork`
 
 ---
 
-## 🔗 References
+### 3.3 First Boot and Login
 
-- [VirtualBox Downloads](https://virtualbox.org/wiki/Downloads)
-- [Kali Linux Downloads](https://kali.org/get-kali)
-- [7-Zip Downloads](https://7-zip.org/download.html)
-- [NetworkWalks Academy](https://www.networkwalks.com)
+1. Powered on the Kali Linux virtual machine.
+2. Verified the graphical boot sequence and login screen loaded without system errors.
+3. Authenticated using default pre-built credentials:
+   - **Username:** `kali`
+   - **Password:** `kali`
+4. Confirmed the Kali XFCE desktop environment loaded properly.
+
+---
+
+### 3.4 Hardening Default Credentials
+
+Pre-built virtual machines ship with well-known default credentials (`kali:kali`). As a mandatory security baseline, account credentials were changed immediately after first login:
+
+```bash
+# 1. Update user account password
+passwd
+
+# 2. Reset and secure root account password
+sudo passwd root
+```
+
+- Verified successful authentication by logging out and logging back in with the new credentials.
+- Ensured elevated `root` sessions do not rely on standard default passwords.
+
+---
+
+### 3.5 Configuring an Isolated Lab Network (NAT Network)
+
+VirtualBox's default **NAT** mode places each virtual machine in its own isolated network sandbox. Under standard NAT, VMs cannot communicate with each other, preventing essential multi-machine penetration testing workflows (e.g., Kali attacking a target VM).
+
+**Implementation:** Configured a dedicated **NAT Network** (`NatNetwork`) allowing all lab machines to share a private virtual subnet while retaining outbound internet connectivity for OS updates and security tool installation.
+
+**VirtualBox Network Manager Settings (`File → Tools → Network Manager → NAT Networks`):**
+- **Network Name:** `NatNetwork`
+- **IPv4 Subnet Prefix:** `10.0.2.0/24`
+- **DHCP Server:** Enabled
+- **IPv6 Support:** Disabled
+
+**VM Network Adapter Configuration:**
+- **Attached to:** NAT Network (`NatNetwork`)
+- **Promiscuous Mode:** `Allow All`
+  > Setting Promiscuous Mode to *Allow All* ensures packet-sniffing and traffic-analysis tools (Wireshark, tcpdump) can capture all traffic passing through the shared virtual network segment.
+
+---
+
+### 3.6 Verifying Network Connectivity
+
+Validated network interface status and IP address assignment from within the Kali terminal using `ifconfig`:
+
+```bash
+ifconfig
+```
+
+**Verification Output:**
+```
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+      inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+      inet6 fe80::a00:27ff:fe2b:9b1  prefixlen 64  scopeid 0x20<link>
+      ether 08:00:27:2b:09:b1  txqueuelen 1000  (Ethernet)
+      RX packets 24  bytes 3120 (3.0 KiB)
+      RX errors 0  dropped 0  overruns 0  frame 0
+      TX packets 32  bytes 3680 (3.5 KiB)
+      TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+- **Interface `eth0`:** Status confirmed **UP and RUNNING**.
+- **Assigned IP:** `10.0.2.15` on `10.0.2.0/24` subnet.
+- **Packet Integrity:** 0 RX/TX errors, 0 dropped packets.
+
+---
+
+### 3.7 Clean Session Shutdown
+
+Performed a graceful VM shutdown via the desktop power menu (`Log Out → Shut Down`) to verify the virtual machine closes cleanly without file system corruption, preparing it for upcoming lab modules.
+
+---
+
+## ✅ Task Checklist
+
+| # | Task Description | Verification | Status |
+|:---:|---|---|:---:|
+| 1 | Download & extract official Kali Linux 2026.2 VirtualBox image | Verified archive integrity | ✔ Completed |
+| 2 | Identify & remove duplicate nested extracted files | Reclaimed ~15+ GB disk space | ✔ Completed |
+| 3 | Import Kali VM into VirtualBox via `.vbox` configuration | Linked to 80.09 GB VDI | ✔ Completed |
+| 4 | First boot verification & desktop GUI login | Successfully reached desktop | ✔ Completed |
+| 5 | Security hardening: change default `kali` and `root` passwords | Verified new credentials | ✔ Completed |
+| 6 | Create isolated NAT Network (`NatNetwork` - `10.0.2.0/24`) | DHCP enabled in VirtualBox | ✔ Completed |
+| 7 | Attach VM adapter & configure Promiscuous Mode to *Allow All* | Sniffing capability enabled | ✔ Completed |
+| 8 | Verify network interface status and IP address via `ifconfig` | `eth0` active at `10.0.2.15/24` | ✔ Completed |
+| 9 | Graceful shutdown and session restart test | Verified clean power cycle | ✔ Completed |
+
+---
+
+## 🌐 Lab Subnet & IP Addressing Plan
+
+| Host / VM | Role | IP Address | Subnet | Adapter Mode |
+|---|---|---|---|---|
+| **Host Machine** | Windows 11 (Physical) | N/A (Host) | Host LAN | Isolated |
+| **Virtual Gateway** | VirtualBox NAT Engine | `10.0.2.1` | `10.0.2.0/24` | NAT Network |
+| **Kali Linux 2026.2** | Attacker Machine | `10.0.2.15` | `10.0.2.0/24` | NatNetwork (DHCP) |
+| **Metasploitable 2** | Victim Machine (Planned - W2+) | `10.0.2.x` | `10.0.2.0/24` | NatNetwork (DHCP) |
+| **Windows Target** | Victim Machine (Planned - W2+) | `10.0.2.x` | `10.0.2.0/24` | NatNetwork (DHCP) |
+
+---
+
+## 💡 Observations & Key Learnings
+
+1. **VM Configuration Links:** `.vbox` XML and `.vdi` disk files must be kept together; moving or renaming one breaks the link within the VirtualBox registry.
+2. **Network Isolation vs Inter-Connectivity:** Default VirtualBox NAT isolates VMs from one another. Using **NAT Network** enables inter-VM communication (Attacker ↔ Victim) while protecting the host's physical network from malicious traffic.
+3. **Promiscuous Mode Requirement:** Packet capture tools like Wireshark require Promiscuous Mode enabled (`Allow All`) on the virtual NIC to inspect non-unicast traffic on the virtual segment.
+4. **Credential Hardening:** Pre-built security appliances must always have default credentials updated immediately to prevent unauthorized access.
+
+---
+
+## 🔭 Next Steps (Week 2 Preview)
+
+With the baseline attacker machine and isolated `10.0.2.0/24` lab subnet established, the next phase will cover:
+- Importing target vulnerable virtual machines (Metasploitable 2) into the `NatNetwork`.
+- Conducting reconnaissance, OSINT, and footprinting (Maltego, theHarvester, GHDB).
+- Performing network host discovery and port scanning with **Nmap** and **Zenmap**.
+- Compiling formal Penetration Testing documentation.
+
+---
+
+## 🐞 Troubleshooting Log
+
+| Issue Encountered | Root Cause | Resolution |
+|---|---|---|
+| **Duplicate file structure after 7-Zip extraction** | Archive extracted into nested duplicate folders containing identical `.vbox` and `.vdi` files (~15+ GB redundant data). | Identified duplicate paths, removed redundant nested folder, and imported the clean primary `.vbox` configuration. |
+
+---
+
+## ⚖️ Ethical Statement & Disclaimer
+
+> All activities documented in this report are conducted exclusively for **educational and authorized security testing purposes** within an isolated virtual lab environment. No unauthorized external networks, systems, or third-party devices were scanned or accessed.
+
+---
+
+## 🔗 References & Documentation
+
+- 📄 **Submitted Report:** [Week 1 Lab Setup Report (PDF)](../Reports/Week1_Lab_Setup_Report.pdf)
+- 🐉 **Kali Linux:** [Official Downloads](https://kali.org/get-kali)
+- 🧰 **Oracle VirtualBox:** [Downloads & Documentation](https://virtualbox.org/wiki/Downloads)
+- 📦 **7-Zip:** [Download Portal](https://7-zip.org/download.html)
+- 🛡️ **NetworkWalks Academy:** [networkwalks.com](https://www.networkwalks.com)
 
 ---
 
 <p align="center">
-  <strong>Week 1</strong> · B082 · NetworkWalks Academy
+  <strong>NetworkWalks Academy</strong> · Cybersecurity Internship B082 · August 2026<br>
+  <em>Instructor: Waqas Karim (CCIE) · Intern: Mithun Kumar Rajak</em>
 </p>
