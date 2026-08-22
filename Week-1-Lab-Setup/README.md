@@ -14,7 +14,7 @@ Build a safe, isolated penetration-testing environment on a personal host machin
 
 ```
 +-----------------------------------------------------------------------+
-|                           HOST: Windows 11                            |
+|                         HOST: Windows 10/11                           |
 |                    Oracle VirtualBox Hypervisor                       |
 |                                                                       |
 |   +---------------------------------------------------------------+   |
@@ -44,7 +44,7 @@ Build a safe, isolated penetration-testing environment on a personal host machin
 
 | Component | Configuration Details |
 |---|---|
-| **Host Operating System** | Windows 11 |
+| **Host Operating System** | Windows 10/11 |
 | **Hypervisor** | Oracle VirtualBox |
 | **Guest OS** | Kali Linux 2026.2 (Rolling, x64) — Pre-built VirtualBox Image |
 | **Base Memory (RAM)** | 4096 MB (4 GB) |
@@ -65,12 +65,12 @@ Build a safe, isolated penetration-testing environment on a personal host machin
 Downloaded the official pre-built **Kali Linux VirtualBox image** (`kali-linux-2026.2-virtualbox-amd64`) as a compressed `.7z` archive and extracted it to obtain two essential files:
 
 - **`kali-linux-2026.2-virtualbox-amd64.vbox`** — The VM configuration file (stores settings including RAM, CPU, network adapters, and boot order).
-- **`kali-linux-2026.2-virtualbox-amd64.vdi`** — The Virtual Disk Image (~15.8 GB compressed base) containing the complete pre-installed Kali Linux OS.
+- **`kali-linux-2026.2-virtualbox-amd64.vdi`** — The Virtual Disk Image (~15.8 GB) containing the complete pre-installed Kali Linux OS.
 
-> 📝 **Linked Pair Architecture:** The `.vbox` and `.vdi` files function as a linked pair. The `.vbox` configuration holds an exact path reference to the `.vdi` disk. Moving one file without the other breaks VM registration in VirtualBox.
+> 📝 **Linked Pair Architecture:** The `.vbox` and `.vdi` files function as a linked pair, not a merged file. The `.vbox` configuration holds a path reference to the `.vdi` disk — VirtualBox reads both together at boot time, so moving one without the other breaks VM registration.
 
 **Troubleshooting — Duplicate File Extraction:**
-During extraction, the archive extracted into a duplicate nested folder structure, creating redundant copies of both `.vbox` and `.vdi` files. The duplicate copies (~15+ GB) were manually removed before importing to prevent redundant disk space consumption.
+During extraction, the archive unpacked into a nested folder of the same name, producing a duplicate copy of both the `.vbox` and `.vdi` files inside it. The redundant nested copy (~15+ GB) was identified and removed, and the archive was re-extracted cleanly before import.
 
 ---
 
@@ -130,7 +130,7 @@ VirtualBox's default **NAT** mode places each virtual machine in its own isolate
 **VM Network Adapter Configuration:**
 - **Attached to:** NAT Network (`NatNetwork`)
 - **Promiscuous Mode:** `Allow All`
-  > Setting Promiscuous Mode to *Allow All* ensures packet-sniffing and traffic-analysis tools (Wireshark, tcpdump) can capture all traffic passing through the shared virtual network segment.
+  > Setting Promiscuous Mode to *Allow All* ensures packet-sniffing and traffic-analysis tools (Wireshark, tcpdump) can capture traffic passing through the shared virtual network segment, not just packets addressed directly to the VM.
 
 ---
 
@@ -146,12 +146,12 @@ ifconfig
 ```
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
       inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
-      inet6 fe80::a00:27ff:fe2b:9b1  prefixlen 64  scopeid 0x20<link>
-      ether 08:00:27:2b:09:b1  txqueuelen 1000  (Ethernet)
-      RX packets 24  bytes 3120 (3.0 KiB)
+      inet6 fe80::ddfa:72a4:12f:8f4a  prefixlen 64  scopeid 0x20<link>
+      ether 08:00:27:5a:87:bc  txqueuelen 1000  (Ethernet)
+      RX packets 6  bytes 3010 (2.9 KiB)
       RX errors 0  dropped 0  overruns 0  frame 0
-      TX packets 32  bytes 3680 (3.5 KiB)
-      TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+      TX packets 39  bytes 4872 (4.7 KiB)
+      TX errors 0  dropped 0  overruns 0  carrier 0  collisions 0
 ```
 
 - **Interface `eth0`:** Status confirmed **UP and RUNNING**.
@@ -175,7 +175,7 @@ Performed a graceful VM shutdown via the desktop power menu (`Log Out → Shut D
 | 3 | Import Kali VM into VirtualBox via `.vbox` configuration | Linked to 80.09 GB VDI | ✔ Completed |
 | 4 | First boot verification & desktop GUI login | Successfully reached desktop | ✔ Completed |
 | 5 | Security hardening: change default `kali` and `root` passwords | Verified new credentials | ✔ Completed |
-| 6 | Create isolated NAT Network (`NatNetwork` - `10.0.2.0/24`) | DHCP enabled in VirtualBox | ✔ Completed |
+| 6 | Create isolated NAT Network (`NatNetwork` – `10.0.2.0/24`) | DHCP enabled in VirtualBox | ✔ Completed |
 | 7 | Attach VM adapter & configure Promiscuous Mode to *Allow All* | Sniffing capability enabled | ✔ Completed |
 | 8 | Verify network interface status and IP address via `ifconfig` | `eth0` active at `10.0.2.15/24` | ✔ Completed |
 | 9 | Graceful shutdown and session restart test | Verified clean power cycle | ✔ Completed |
@@ -186,20 +186,20 @@ Performed a graceful VM shutdown via the desktop power menu (`Log Out → Shut D
 
 | Host / VM | Role | IP Address | Subnet | Adapter Mode |
 |---|---|---|---|---|
-| **Host Machine** | Windows 11 (Physical) | N/A (Host) | Host LAN | Isolated |
+| **Host Machine** | Windows 10/11 (Physical) | N/A (Host) | Host LAN | Isolated |
 | **Virtual Gateway** | VirtualBox NAT Engine | `10.0.2.1` | `10.0.2.0/24` | NAT Network |
 | **Kali Linux 2026.2** | Attacker Machine | `10.0.2.15` | `10.0.2.0/24` | NatNetwork (DHCP) |
-| **Metasploitable 2** | Victim Machine (Planned - W2+) | `10.0.2.x` | `10.0.2.0/24` | NatNetwork (DHCP) |
-| **Windows Target** | Victim Machine (Planned - W2+) | `10.0.2.x` | `10.0.2.0/24` | NatNetwork (DHCP) |
+| **Metasploitable 2** | Victim Machine (Planned – W2+) | `10.0.2.x` | `10.0.2.0/24` | NatNetwork (DHCP) |
+| **Windows Target** | Victim Machine (Planned – W2+) | `10.0.2.x` | `10.0.2.0/24` | NatNetwork (DHCP) |
 
 ---
 
 ## 💡 Observations & Key Learnings
 
-1. **VM Configuration Links:** `.vbox` XML and `.vdi` disk files must be kept together; moving or renaming one breaks the link within the VirtualBox registry.
-2. **Network Isolation vs Inter-Connectivity:** Default VirtualBox NAT isolates VMs from one another. Using **NAT Network** enables inter-VM communication (Attacker ↔ Victim) while protecting the host's physical network from malicious traffic.
-3. **Promiscuous Mode Requirement:** Packet capture tools like Wireshark require Promiscuous Mode enabled (`Allow All`) on the virtual NIC to inspect non-unicast traffic on the virtual segment.
-4. **Credential Hardening:** Pre-built security appliances must always have default credentials updated immediately to prevent unauthorized access.
+- **VM Configuration Links:** `.vbox` XML and `.vdi` disk files must be kept together; moving or renaming one breaks the link within the VirtualBox registry.
+- **Network Isolation vs Inter-Connectivity:** Default VirtualBox NAT isolates VMs from one another. Using **NAT Network** enables inter-VM communication (Attacker ↔ Victim) while still protecting the host's physical network from lab traffic.
+- **Promiscuous Mode Requirement:** Packet capture tools like Wireshark require Promiscuous Mode enabled (*Allow All*) on the virtual NIC to inspect non-unicast traffic on the virtual segment.
+- **Credential Hardening:** Pre-built VM images must always have default credentials updated immediately after first boot to prevent unauthorized access.
 
 ---
 
@@ -217,7 +217,8 @@ With the baseline attacker machine and isolated `10.0.2.0/24` lab subnet establi
 
 | Issue Encountered | Root Cause | Resolution |
 |---|---|---|
-| **Duplicate file structure after 7-Zip extraction** | Archive extracted into nested duplicate folders containing identical `.vbox` and `.vdi` files (~15+ GB redundant data). | Identified duplicate paths, removed redundant nested folder, and imported the clean primary `.vbox` configuration. |
+| **Duplicate file structure after archive extraction** | Archive extracted into a nested folder of the same name, containing an identical inner copy of the `.vbox` and `.vdi` files (~15+ GB redundant data). | Identified duplicate paths, removed the redundant nested folder, and re-extracted the archive cleanly before importing the primary `.vbox` configuration. |
+| **"Invalid settings detected" in Network tab** | NAT Network adapter type was selected, but no specific network name had been chosen from the "Name" dropdown. | Created the `NatNetwork` via VirtualBox's Network Manager first, then re-selected it from the VM's **Network → Name** dropdown. |
 
 ---
 
@@ -232,12 +233,11 @@ With the baseline attacker machine and isolated `10.0.2.0/24` lab subnet establi
 - 📄 **Submitted Report:** [Week 1 Lab Setup Report (PDF)](../Reports/Week1_Lab_Setup_Report.pdf)
 - 🐉 **Kali Linux:** [Official Downloads](https://kali.org/get-kali)
 - 🧰 **Oracle VirtualBox:** [Downloads & Documentation](https://virtualbox.org/wiki/Downloads)
-- 📦 **7-Zip:** [Download Portal](https://7-zip.org/download.html)
-- 🛡️ **NetworkWalks Academy:** [networkwalks.com](https://www.networkwalks.com)
+- 🛡️ **NetworkWalks Academy:** [networkwalks.com](https://www.networkwalks.com/)
 
 ---
 
 <p align="center">
-  <strong>NetworkWalks Academy</strong> · Cybersecurity Internship B082 · August 2026<br>
+  <strong>NetworkWalks Academy</strong> · Cybersecurity Internship Batch B082 · August 2026<br>
   <em>Instructor: Waqas Karim (CCIE) · Intern: Mithun Kumar Rajak</em>
 </p>
