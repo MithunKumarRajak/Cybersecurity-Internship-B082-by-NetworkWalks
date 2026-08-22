@@ -1,4 +1,4 @@
-# 🔗 Resources & References
+# 🔗 Resources & Lab Reference Guide
 
 > **NetworkWalks Academy | Batch B082 | August 2026**
 
@@ -6,114 +6,112 @@
 
 ## 📋 Overview
 
-A curated collection of tools, references, and cheat sheets for the B082 Cybersecurity Internship Program.
+A practical reference guide containing verified software download sources, official documentation, and command cheat sheets directly practiced and utilized in the **Cybersecurity & Ethical Hacking Lab**.
 
 ---
 
-## 🛠️ Tools & Downloads
+## 🛠️ Lab Software & Downloads
 
-### Essential Software
+### Hypervisor & Utilities
 
-| Tool | Purpose | Download Link |
+| Software | Version / Purpose | Official Source |
 |---|---|---|
-| 📦 **7-Zip** | Archive extraction (.7z, .tar.gz) | [Download](https://7-zip.org/download.html) |
-| 🧰 **Oracle VirtualBox** | Hypervisor & Virtual Machine Manager | [Download](https://virtualbox.org/wiki/Downloads) |
-| 🐉 **Kali Linux** | Penetration Testing OS (VirtualBox Image) | [Download](https://kali.org/get-kali) |
-| 🪟 **Windows ISOs** | Victim Target Environments | [Evaluation Center](https://www.microsoft.com/en-us/evalcenter) |
-| 💀 **Metasploitable 2** | Vulnerable Target VM | [Download](https://sourceforge.net/projects/metasploitable/) |
+| 🧰 **Oracle VirtualBox** | Type-2 Hypervisor for isolated lab environment | [VirtualBox Downloads](https://virtualbox.org/wiki/Downloads) |
+| 📦 **7-Zip** | Archive utility for `.7z` VM image extraction | [7-Zip Official](https://7-zip.org/download.html) |
 
-### Kali Linux Built-in Toolset
+### Operating System Images
 
-| Category | Tools Available in Lab |
-|---|---|
-| 🔍 **Reconnaissance & OSINT** | Maltego, theHarvester, Recon-ng, Shodan, WHOIS, DNSenum |
-| 📡 **Scanning & Enumeration** | Nmap, Zenmap, Nessus, Nikto, Masscan |
-| ⚔️ **Exploitation** | Metasploit Framework, Burp Suite, SQLMap, SearchSploit |
-| 🔓 **Password Attacks** | John The Ripper (JTR), Hydra, Hashcat, Medusa |
-| 🦈 **Traffic Analysis** | Wireshark, tcpdump, Ettercap, TShark |
-| 📝 **Documentation** | CherryTree, KeepNote, Obsidian |
+| System | Role | Official Source |
+|---|---|---|
+| 🐉 **Kali Linux 2026.2** | Attacker VM (Pre-built VirtualBox Image) | [Kali Linux Get-Kali](https://kali.org/get-kali) |
 
 ---
 
-## 📚 NetworkWalks Official Channels
+## 📖 Practiced Commands Reference
 
-- 🌐 **Website:** [networkwalks.com](https://www.networkwalks.com)
-- 🏢 **LinkedIn Page:** [NetworkWalks Company](https://linkedin.com/company/networkwalks/)
-- 👨‍🏫 **Instructor Profile:** [Waqas Karim CCIE](https://linkedin.com/in/waqaskarim/)
-- 📱 **WhatsApp Community:** [Join Group](https://chat.whatsapp.com/DBTvMHehxiaBVT3Y58FWRh)
-- ✈️ **Telegram Channel:** [Join Channel](https://t.me/+mi3ANgkw3vpkYTY0)
-
----
-
-## 📖 Useful Commands Cheat Sheet
-
-### Linux & Networking Essentials
+### 1. System Administration & Hardening (Week 1 Practiced)
 
 ```bash
-# System & user identity
-uname -a                 # Kernel & architecture
-whoami                   # Current active user
-id                       # UID, GID, and groups
+# Verify system architecture & kernel release
+uname -a
 
-# Network configuration & verification
-ifconfig                 # Display active network interfaces
-ip a                     # Modern IP address display
-ip route                 # View default gateway routing table
-netstat -tuln            # Active listening TCP/UDP ports
+# Check active user identity and privileges
+whoami
+id
 
-# File & search operations
-ls -lah                  # Detailed file listing including hidden
-cat /etc/passwd          # Inspect system user accounts
-find / -name "*.conf"    # Locate configuration files
+# Hardening default credentials (mandatory on first boot)
+passwd              # Update 'kali' user password
+sudo passwd root    # Set and secure 'root' account password
 ```
 
-### Nmap Network Scanning (`10.0.2.0/24` Lab Subnet)
+### 2. Network Inspection & Lab Subnet Verification (Week 1 Practiced)
 
 ```bash
-# Host discovery on the lab subnet
+# Inspect network interfaces and verify 10.0.2.15/24 IP assignment
+ifconfig
+ip a
+
+# Check active network routes and default gateway
+ip route
+
+# Test internal gateway connectivity
+ping -c 4 10.0.2.1
+
+# Test outbound internet and DNS resolution
+ping -c 4 8.8.8.8
+nslookup networkwalks.com
+```
+
+### 3. Footprinting, OSINT & Reconnaissance (Week 2 Reference)
+
+```bash
+# Query domain WHOIS registration details
+whois [target-domain]
+
+# DNS record enumeration
+nslookup [target-domain]
+dig [target-domain] ANY
+
+# Open-source email, domain and IP harvesting
+theHarvester -d [target-domain] -b all -l 100
+```
+
+### 4. Nmap & Zenmap Network Scanning (`10.0.2.0/24` Lab Subnet)
+
+```bash
+# Host discovery sweep across the NatNetwork subnet
 nmap -sn 10.0.2.0/24
 
-# Fast scan top ports
-nmap -T4 -F 10.0.2.15
+# Fast scan of the top 100 most common ports
+nmap -T4 -F [target-ip]
 
-# Full TCP port scan with OS & service version detection
-nmap -sS -sV -O -p- 10.0.2.15
+# Service version detection on open ports
+nmap -sV [target-ip]
 
-# Aggressive scan with default NSE scripts
-nmap -A -v 10.0.2.15
+# Remote Operating System fingerprinting
+nmap -O [target-ip]
 
-# UDP scan for common services (DNS, SNMP, DHCP)
-nmap -sU --top-ports 50 10.0.2.15
-```
-
-### Metasploit Framework Basics
-
-```bash
-# Launch framework console
-msfconsole -q
-
-# Search & select modules
-search type:exploit name:smb
-use exploit/windows/smb/ms17_010_eternalblue
-
-# Configure target & payload parameters
-set RHOSTS 10.0.2.x
-set LHOST 10.0.2.15
-show options
-
-# Launch exploit
-exploit
+# Comprehensive scan (Service versions + OS detection + Traceroute)
+nmap -T4 -A -v [target-ip]
 ```
 
 ---
 
-## 📞 Support & Community
+## 📚 Official Documentation & Manuals
 
-| Channel | Purpose | Contact / Link |
+| Resource | Scope | Link |
 |---|---|---|
-| **Lead Instructor** | Technical queries & guidance | Via WhatsApp Class Group |
-| **Program Coordinator** | Administrative & submission support | Via WhatsApp Class Group |
-| **Cisco NetAcad Support** | Academy enrollment | netacadsupport@netacad.com |
+| **Kali Linux Official Documentation** | OS configuration, package management & tool usage | [kali.org/docs](https://www.kali.org/docs/) |
+| **Nmap Reference Guide** | Official command-line flags, scan types & NSE scripts | [nmap.org/book/man.html](https://nmap.org/book/man.html) |
+| **Oracle VirtualBox User Manual** | Networking modes (NAT vs NAT Network), snapshot management | [virtualbox.org/manual](https://www.virtualbox.org/manual/) |
+
+---
+
+## 🏛️ Program References
+
+- 🌐 **NetworkWalks Academy:** [networkwalks.com](https://www.networkwalks.com)
+- 🏢 **NetworkWalks LinkedIn:** [Company Page](https://linkedin.com/company/networkwalks/)
+- 👨‍🏫 **Lead Instructor:** [Waqas Karim (CCIE)](https://linkedin.com/in/waqaskarim/)
 
 ---
 
