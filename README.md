@@ -34,13 +34,11 @@
 │   └── README.md                  <- References, downloads & cheat sheets
 ├── Week-1-Lab-Setup/
 │   └── README.md                  <- Week 1: Kali Linux 2026.2 + VirtualBox setup
-├── Week-2-Footprinting-Scanning/
-│   └── README.md                  <- Week 2: Reconnaissance, scanning & VAPT
-├── Week-3-Cracking-Attacking/
-│   └── README.md                  <- Week 3: Exploitation & password cracking
-└── Week-4-Full-Pentest-Project/
-    └── README.md                  <- Week 4: Capstone pentest + SOC Wireshark report
+└── Week-2-Footprinting-Scanning/
+    └── README.md                  <- Week 2: Reconnaissance, scanning & VAPT
 ```
+
+> *Note: Weeks 3 and 4 modules will be added upon completion.*
 
 ---
 
